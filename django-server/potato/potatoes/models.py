@@ -5,8 +5,8 @@ from datetime import datetime
 class IgritItem(models.Model):
     id = models.AutoField(primary_key=True)
     date = models.DateTimeField()
-    price = models.IntegerField()
-    is_price = models.BooleanField()
+    price = models.FloatField(default=0)
+    price_bool = models.BooleanField(default=False)
     path = models.CharField(max_length=100, default="") # e.g "/ogloszenie/ziemniaki-fioletowe-901593"
     voivodeship = models.CharField(max_length=100, default="")
     city = models.CharField(max_length=100, default="")
