@@ -94,9 +94,11 @@ for item in items:
         ))
 
     else:
-        print("Powtorzenie!")
+        print("[LOG] No new data!")
         break
 if bool(tablica):
+    counter = 0
     for item in reversed(tablica):
+        counter += 1
         item.save()
-        print("SAVED")
+        print("[LOG] SAVED {} inputs ...".format(counter))
