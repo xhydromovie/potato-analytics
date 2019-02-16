@@ -4,5 +4,7 @@ from . import views
 app_name = "potatoes"
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('igrit/', views.igrit_chart, name='igrit'),
+    path('sell/', views.igrit_chart, name='igrit'),
+    path('display/', views.display_chart, name='display'),
 ]

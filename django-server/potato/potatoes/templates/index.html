@@ -4,9 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <canvas id="myChart"></canvas>
+    <script>
+
+        var label_b = [];
+        var data_b = [];
+
+        var label_s = [];
+        var data_s = [];
+
+        $.ajax({
+            method: "GET",
+            url: '/potatoes/igrit/',
+
+            success: function(data) {
+            label_s = data.map(function(e) {
+                return e.id;
+            });
+            data_s = data.map(function(e) {
+                return e.price;
+            });
+            }
+        })
+
+        $.ajax({
+            method: "GET",
+            url: '/potatoes/sell/',
+
+            success: function(data) {
+            label_b = data.map(function(e) {
+                return e.id;
+            });
+            data_b = data.map(function(e) {
+                return e.price;
+            });
+            }
+        })
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: label_s,
+                datasets: [{
+                    label: "My First dataset",
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: data_s,
+                    fill: false,
+                    lineTension: 0,
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+
+        var chart2 = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: label_b,
+                datasets: [{
+                    label: "My First dataset",
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: data_b,
+                    fill: false,
+                    lineTension: 0,
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    </script>
 </body>
 </html>
